@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Расчеты радиаторов Kermi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="SHORTCUT ICON" href="favicon.ico">
+    <link href="css/customer_styles.css" rel="stylesheet"/>
+
+    
+</head>
+<body>
+
+    <div class="calculate__wrapper-block">
+        <div class="calculate__title">
+            <h2> Расчеты радиаторов Kermi </h2>
+        </div>
+
+        <div id="reloadCalc" class="calculate__container">
+            <div class="table__main-block">
+                <table id="table1V" class="table1V">
+                    <tbody>
+                        <tr><th rowspan="2" id="getTopTableElement1"> высота <div class="table__length_style">длина</div></th></tr>
+                        <tr id="getTableItemTh1"></tr>
+                        <tr id="getTableMainItemTr1"></tr>
+                    </tbody>
+                </table>
+                <p class="under__table-text">В таблице указана теплоотдача радиаторов Kermi при температурном напоре Δt 50 град.С. Для того, чтобы пересчитать теплоотдачу для другого температурного режима, введите температуру подачи, обратки и помещения и нажмите "Пересчитать". Теплоотдача радиаторов Kermi рассчитывается по EN-442. Пересчет тепловой мощности дает точный результат в соответствии с нормативной документацией Kermi.</p>
+            </div>
+
+            <div class="inputs__main_block">
+                <div class="title__input_block">
+                    <h3 class="title__calculator"><span class="celsius">C&deg;</span> Мощность радиаторов Kermi </h3>
+                </div>
+                <div class="blocks__of_inputs">
+                    <div class="blocks__of_inputs-wrapper">
+                        <div class="input__block-item">
+                            <div class="input_block">
+                                <input type="text" id="temperatureSupply" value="75" size="4" onchange="return checking(this);">
+                            </div>
+                            <div class="label_block">
+                                <p>Температура подающей линии</p>
+                            </div>
+                        </div>
+                        <div class="input__block-item">
+                            <div class="input_block">
+                                <input type="text" id="temperatureReturn" value="65" size="4" onchange="return checking(this);">
+                            </div>
+                            <div class="label_block">
+                                <p>Температура обратной линии</p>
+                            </div>
+                        </div>
+                        <div class="input__block-item">
+                            <div class="input_block">
+                                <input type="text" id="temperatureRoomOwn" value="65" size="4" onchange="return checking(this);">
+                            </div>
+                            <div class="label_block">
+                                <p>Температура обратной линии</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="button__block">
+                       <input class="count__button" type="button" value="Пересчитать" onclick="calculate();">
+                   </div>
+                </div>
+            </div>
+
+            <!--hidden table, then needed in calculate function, so they must be here-->
+            <table class="hidden_elements">
+                <tbody>
+                <td>
+                    <input type="text" id="temperatureRoom" value="20">
+                </td>
+                <p  class="hidden_elements" id="temperature_difference">50</p></tr>
+                </tbody>
+            </table>
+            <!--hidden table, then needed in calculate function, so they must be here-->
+        </div>
+
+        <div class="hidden_elements">
+            <div>
+                <table id="table1C" class="table1C">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2" id="getTopTableElement2"> высота <div class="table__length_style">длина</div></th>
+                        </tr>
+                        <tr id="getTableItemTh2"></tr>
+                        <tr id="getTableMainItemTr2"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="js/functions.js"></script>
+</body>
+</html>
