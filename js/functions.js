@@ -80,6 +80,7 @@ const createTable1VTrElements = (count, flag, id_name=' ') => {
                     onmouseout: 'unselect(this.id)',
                     innerHTML: String(bigArray[j][i])
                 })
+                td_element.setAttribute('name',`${i}`)
                 trElem.appendChild(td_element);
             }
         }
@@ -204,7 +205,6 @@ function calculate() {
             let newStr = attributeValue.replace(re, '');
             tableValues[count].setAttribute('id', newStr);
             createHover()
-            $.fn.hoverFunction()
             ++count;
         }
     } catch (err) { someCalculation(); }
@@ -228,8 +228,27 @@ createHover()
 
 function createHover(){
     let trv = document.getElementById('table1V').getElementsByTagName('tr')
+    let tdv = document.getElementById('table1V').getElementsByTagName('td')
+
     for(let i = 0; i < trv.length; i++){
         MakeRowHover(trv[i])
+    }
+
+    for(let i = 0; i < tdv.length; i++){
+        tdv[i].addEventListener('mouseover', function (){
+            let id_value = parseInt(tdv[i].getAttribute('name')) + 1;
+            let some = document.querySelectorAll('td:nth-child(' + id_value + ')')
+            some.forEach( elem => {
+                elem.classList.add('green');
+            })
+        })
+        tdv[i].addEventListener('mouseout', function (){
+            let id_value = parseInt(tdv[i].getAttribute('name')) + 1;
+            let some = document.querySelectorAll('td:nth-child(' + id_value + ')')
+            some.forEach( elem => {
+                elem.classList.remove('green');
+            })
+        })
     }
 
     function MakeRowHover(row){
@@ -242,19 +261,14 @@ function createHover(){
     }
 }
 
+// $('#table1V td').hover(function(){
+//     let t = parseInt($(this).attr('name'))+1;
+//     $('td:nth-child(' + t + ')').css('background', 'green');
+// }, function() {
+//     let t = parseInt($(this).attr('name'))+1;
+//     $('td:nth-child(' + t + ')').removeAttr( 'style' );
+// });
 
 
-
-$.fn.hoverFunction = function (){
-    $('#table1V td').hover(function(){
-        let t = parseInt($(this).index())+1;
-        $('td:nth-child(' + t + ')').css('background', 'green');
-    }, function() {
-        let t = parseInt($(this).index())+1;
-        $('td:nth-child(' + t + ')').removeAttr( 'style' );
-    });
-}
-
-$.fn.hoverFunction()
 
 });
