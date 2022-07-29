@@ -1,6 +1,4 @@
 /* static table values  */
-jQuery(document).ready(function() {
-
 let bigArray = [
     [400, 239,  367, 301, 378, 454, 257, 409, 513, 616, 717, 368, 584, 735, 879, 1017],
     [500, 299,  459, 377, 472, 567, 321, 511, 641, 770, 896, 459, 730, 918, 1099, 1271],
@@ -187,7 +185,6 @@ function checking(input) {
     else { input.value = ""; }
 }
 
-$('#button').click(calculate);
 function calculate() {
     localStorage.setItem('l_temperatureSupply', document.getElementById('temperatureSupply').value);
     localStorage.setItem('l_temperatureReturn', document.getElementById('temperatureReturn').value);
@@ -204,8 +201,8 @@ function calculate() {
             let re = /zm /gi;
             let newStr = attributeValue.replace(re, '');
             tableValues[count].setAttribute('id', newStr);
-            createHover()
             ++count;
+            createHover()
         }
     } catch (err) { someCalculation(); }
 }
@@ -231,7 +228,12 @@ function createHover(){
     let tdv = document.getElementById('table1V').getElementsByTagName('td')
 
     for(let i = 0; i < trv.length; i++){
-        MakeRowHover(trv[i])
+        trv[i].addEventListener("mouseover", function() {
+            this.style.backgroundColor = "green";
+        });
+        trv[i].addEventListener("mouseout", function() {
+            this.style.backgroundColor = "white";
+        });
     }
 
     for(let i = 0; i < tdv.length; i++){
@@ -250,25 +252,4 @@ function createHover(){
             })
         })
     }
-
-    function MakeRowHover(row){
-        row.addEventListener("mouseover", function() {
-            this.style.backgroundColor = "green";
-        });
-        row.addEventListener("mouseout", function() {
-            this.style.backgroundColor = "white";
-        });
-    }
 }
-
-// $('#table1V td').hover(function(){
-//     let t = parseInt($(this).attr('name'))+1;
-//     $('td:nth-child(' + t + ')').css('background', 'green');
-// }, function() {
-//     let t = parseInt($(this).attr('name'))+1;
-//     $('td:nth-child(' + t + ')').removeAttr( 'style' );
-// });
-
-
-
-});
