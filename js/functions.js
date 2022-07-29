@@ -1,6 +1,5 @@
 /* static table values  */
-
-
+jQuery(document).ready(function() {
 
 let bigArray = [
     [400, 239,  367, 301, 378, 454, 257, 409, 513, 616, 717, 368, 584, 735, 879, 1017],
@@ -22,6 +21,7 @@ let bigArray = [
 ]
 
 let smallTableArray = [300, 500, 300, 400, 500, 200, 300, 400, 500, 600, 200, 300, 400, 500, 600]
+//
 
 let colspanArray = [ [2, 11], [3, 12], [5, 22], [5, 33] ]
 /*--------------------------------------*/
@@ -106,7 +106,7 @@ function someCalculation() {
     let temperatureRoom = localStorage.getItem('l_temperatureRoom');
     document.getElementById('temperature_difference').innerHTML = (parseInt(temperatureSupply) + parseInt(temperatureReturn)) / 2 - temperatureRoom;
 
-    for (let n = 1; n < 19; n++) {
+    for (let n = 1; n < 16; n++) {
         let maxColumn = 16;
         for (let i = 1; i < maxColumn; i++) {
             switch (i) {
@@ -186,6 +186,7 @@ function checking(input) {
     else { input.value = ""; }
 }
 
+$('#button').click(calculate);
 function calculate() {
     localStorage.setItem('l_temperatureSupply', document.getElementById('temperatureSupply').value);
     localStorage.setItem('l_temperatureReturn', document.getElementById('temperatureReturn').value);
@@ -201,7 +202,9 @@ function calculate() {
             let attributeValue = tableValues[count].getAttribute('id')
             let re = /zm /gi;
             let newStr = attributeValue.replace(re, '');
-            tableValues[count].setAttribute('id', '' + newStr + '')
+            tableValues[count].setAttribute('id', newStr);
+            createHover()
+            $.fn.hoverFunction()
             ++count;
         }
     } catch (err) { someCalculation(); }
@@ -221,3 +224,37 @@ createTopTitle(1);
 createTopTitle(2);
 /*repeat input values*/
 repeatInputValues()
+createHover()
+
+function createHover(){
+    let trv = document.getElementById('table1V').getElementsByTagName('tr')
+    for(let i = 0; i < trv.length; i++){
+        MakeRowHover(trv[i])
+    }
+
+    function MakeRowHover(row){
+        row.addEventListener("mouseover", function() {
+            this.style.backgroundColor = "green";
+        });
+        row.addEventListener("mouseout", function() {
+            this.style.backgroundColor = "white";
+        });
+    }
+}
+
+
+
+
+$.fn.hoverFunction = function (){
+    $('#table1V td').hover(function(){
+        let t = parseInt($(this).index())+1;
+        $('td:nth-child(' + t + ')').css('background', 'green');
+    }, function() {
+        let t = parseInt($(this).index())+1;
+        $('td:nth-child(' + t + ')').removeAttr( 'style' );
+    });
+}
+
+$.fn.hoverFunction()
+
+});
