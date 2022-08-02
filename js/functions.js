@@ -249,7 +249,7 @@ function createHover(){
 
     for(let i = 0; i < trv.length; i++){
         trv[i].addEventListener("mouseover", function() {
-            this.style.backgroundColor = "green";
+            this.style.backgroundColor = "rgba(118, 171, 39, 0.5)";
         });
         trv[i].addEventListener("mouseout", function() {
             this.style.backgroundColor = "white";
